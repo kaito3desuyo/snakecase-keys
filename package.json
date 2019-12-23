@@ -1,6 +1,7 @@
 {
   "name": "snakecase-keys",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "version": "3.1.0",
   "description": "Convert an object's keys to snake case",
   "license": "MIT",
@@ -11,6 +12,8 @@
     "url": "bendrucker.me"
   },
   "scripts": {
+    "build": "rimraf ./dist/* && webpack",
+    "build:prod": "rimraf ./dist/* && cross-env NODE_ENV=production webpack",
     "test": "standard && tape test.js && tsd"
   },
   "keywords": [
@@ -21,9 +24,20 @@
     "object"
   ],
   "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "babel-engine-plugin": "git+https://github.com/gavinsharp/babel-engine-plugin.git#drop_node_6",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-es2017-object-entries": "0.0.5",
+    "copy-webpack-plugin": "^5.1.1",
+    "cross-env": "^6.0.3",
+    "regenerator-runtime": "^0.13.3",
+    "rimraf": "^3.0.0",
     "standard": "^14.0.0",
     "tape": "^4.0.0",
-    "tsd": "^0.11.0"
+    "tsd": "^0.11.0",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10"
   },
   "files": [
     "index.js",
