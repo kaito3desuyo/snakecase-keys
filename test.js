@@ -1,7 +1,7 @@
 'use strict'
 
-var test = require('tape')
-var Snake = require('./')
+const test = require('tape')
+const Snake = require('./')
 
 test(function (t) {
   t.deepEqual(Snake({ fooBar: 'baz', nested: { fooBar: 'baz' } }), { foo_bar: 'baz', nested: { foo_bar: 'baz' } })
@@ -17,8 +17,15 @@ test('shallow conversion with {deep: false}', function (t) {
 })
 
 test('arrays', function (t) {
-  var result = Snake({ foo: [0, 1, 2] })
+  const result = Snake({ foo: [0, 1, 2] })
   t.deepEqual(result, { foo: [0, 1, 2] })
+  t.ok(Array.isArray(result.foo))
+  t.end()
+})
+
+test('snakecase objects in arrays', function (t) {
+  const result = Snake({ foo: [0, { fooBar: 'baz', nested: { fooBar: 'baz' } }, 2] })
+  t.deepEqual(result, { foo: [0, { foo_bar: 'baz', nested: { foo_bar: 'baz' } }, 2] })
   t.ok(Array.isArray(result.foo))
   t.end()
 })
